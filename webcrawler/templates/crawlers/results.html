@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crawled Data</title>
+</head>
+<body>
+    <h1>Crawled Data</h1>
+    <ul>
+        {% for item in data %}
+        <li>
+            <h2>{{ item.title }}</h2>
+            <p>{{ item.content }}</p>
+            <p><a href="{{ item.url }}" target="_blank">{{ item.url }}</a></p>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

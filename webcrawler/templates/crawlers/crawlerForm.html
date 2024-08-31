@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Crawler</title>
+    <!-- Spectre.css -->
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+        .btn-block {
+            width: 100%;
+        }
+        .results {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container grid-lg">
+        <div class="columns">
+            <div class="column col-6 col-mx-auto">
+                <h1 class="text-center">Website Crawler</h1>
+
+                <!-- Crawler Form -->
+                <form method="post" class="form-group">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary btn-block">Crawl Website</button>
+                </form>
+                
+                <!-- Display success or error messages -->
+                {% if message %}
+                    <div class="toast toast-success">
+                        {{ message }}
+                    </div>
+                {% elif error %}
+                    <div class="toast toast-error">
+                        {{ error }}
+                    </div>
+                {% endif %}
+
+                <!-- Display results -->
+                {% if result %}
+                    <div class="results">
+                        <h3 class="text-center">Crawled Data</h3>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>URL</th>
+                                    <th>Price</th>
+                                    <th>Size</th>
+                                    <th>Location</th>
+                                    <th>Categories</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{ result.title }}</td>
+                                    <td><a href="{{ result.url }}" target="_blank">{{ result.url }}</a></td>
+                                    <td>{{ result.price }}</td>
+                                    <td>{{ result.property_size }}</td>
+                                    <td>{{ result.location }}</td>
+                                    <td>{{ result.property_categories }}</td>
+                                    <td>{{ result.email }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
